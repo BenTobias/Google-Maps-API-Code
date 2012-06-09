@@ -1,6 +1,6 @@
 <html>
   <head>
-      <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB_cJbpuc11DmtUII6emuyMoTwsXe9Wf0k&sensor=true">
+      <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={YOUR_API_KEY}&sensor=true">
       </script>
 
 </head>
