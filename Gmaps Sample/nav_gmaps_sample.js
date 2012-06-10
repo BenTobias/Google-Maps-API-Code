@@ -16,6 +16,14 @@ function initialize() {
 				lat: currentCoords.latitude,
 				lng: currentCoords.longitude
 			});
+            map.addMarker({
+                lat: currentCoords.latitude,
+                lng: currentCoords.longitude,
+                title: 'Start Marker',
+                infoWindow: {
+                    content: "You are here!"
+                }
+            });
 		},
 		error: function(error) {
 			alert('Geolocation failed: '+error.message);
@@ -44,10 +52,8 @@ $('#geocoding_form').submit(function(e){
 
         //Clear out all markers, polylines, hide option buttons,
         //and empty title string, from previous calculations
-        map.removeMarkers();
-        removePolylines();
+        clearExisting();
         $("#options").children().css('display', 'none');
-        document.getElementById("title").innerText = "";
 
         //start of query URI
     	var queryHTML = "http://46.137.253.103:8000/api/1.0/route_xy.json?";
@@ -98,6 +104,13 @@ function addtoHTML(queryHTML){
 	}
 
 	calcRoute(queryHTML, route_type_array[0], route_type_array);
+}
+
+function clearExisting(){
+    map.removeMarkers();
+    removePolylines();
+    document.getElementById("title").innerText = "";
+    document.getElementById("directions").innerText = "";
 }
 
 //remove existing polylines
@@ -151,8 +164,7 @@ function calcRoute(queryHTML, route_type, route_type_array) {
 
 //calculates route from current json data with other options
 function calcNewRoute(route_type) {
-    map.removeMarkers();
-    removePolylines();
+    clearExisting();
 
     var HTMLString = "getJsonFile.php?link[]=fetch";
     
